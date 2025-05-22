@@ -32,8 +32,6 @@ const array = Array.from({ length: 400 })
     ],
   }));
 
-//console.log(array);
-
 const payload = {
   members: array,
 };
@@ -43,39 +41,13 @@ console.log('json', jsonString.length);
 const base64String = btoa(jsonString);
 console.log('base64', base64String.length);
 
-// fetch('http://localhost:3000/receber-base64', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify({ base64: base64String }),
-// })
-//   .then((response) => response.json())
-//   .then((data) => console.log(data))
-//   .catch((error) => console.error(error));
-
-fetch('http://localhost:3000/receber-json', {
+fetch('http://localhost:3000/receber-base64', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(payload), //JSON.stringify({ base64: base64String }),
+  body: JSON.stringify({ base64: base64String }),
 })
   .then((response) => response.json())
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
-
-const compressedData = pako.gzip(jsonString);
-console.log('gzip', compressedData.length);
-
-// fetch('http://localhost:3000/receber-gzip', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Encoding': 'gzip',
-//     'Content-Type': 'application/json',
-//   },
-//   body: compressedData, //JSON.stringify({ base64: base64String }),
-// })
-//   .then((response) => response.text())
-//   .then((data) => console.log(data))
-//   .catch((error) => console.error(error));
